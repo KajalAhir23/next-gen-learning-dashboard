@@ -57,7 +57,7 @@ Edit `.env.local`:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://xnvpwiepeavkhtrumgic.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_or_publishable_key
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_4pEciNtJKLCSl41F1MdeSg_IYjQLFwr
 NEXT_PUBLIC_STUDENT_NAME=Kajal
 ```
 
