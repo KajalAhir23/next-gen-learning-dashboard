@@ -1,4 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
+import {
+  getSupabaseAnonKey,
+  getSupabaseUrl,
+  isValidSupabaseKey,
+  isValidSupabaseUrl,
+} from "@/lib/supabase/env";
 import { mockCourses } from "./mock-courses";
 
 /** @typedef {import('@/types/course').Course} Course */
@@ -17,8 +23,8 @@ const PLACEHOLDER_PATTERNS = [
 ];
 
 function isSupabaseConfigured() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
+  const url = getSupabaseUrl();
+  const key = getSupabaseAnonKey();
 
   if (!url || !key) return false;
 
@@ -33,10 +39,7 @@ function isSupabaseConfigured() {
     return false;
   }
 
-  const validUrl = /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(url);
-  const validKey = key.startsWith("eyJ") && key.length > 100;
-
-  return validUrl && validKey;
+  return isValidSupabaseUrl(url) && isValidSupabaseKey(key);
 }
 
 function useMockInDev(reason) {
