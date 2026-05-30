@@ -56,9 +56,9 @@ cp .env.example .env.local
 Edit `.env.local`:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_public_key_here
-NEXT_PUBLIC_STUDENT_NAME=Alex
+NEXT_PUBLIC_SUPABASE_URL=https://xnvpwiepeavkhtrumgic.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_or_publishable_key
+NEXT_PUBLIC_STUDENT_NAME=Kajal
 ```
 
 | Variable | Where to find it |
