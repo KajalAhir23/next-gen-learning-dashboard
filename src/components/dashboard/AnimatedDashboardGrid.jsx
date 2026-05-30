@@ -13,28 +13,24 @@ export function AnimatedDashboardGrid({ courses, studentName }) {
     : tileEntrance;
 
   return (
-    <section
+    <motion.section
       aria-label="Learning dashboard"
       className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:gap-6"
+      variants={dashboardStagger}
+      initial="hidden"
+      animate="show"
     >
-      <motion.div
-        className="contents"
-        variants={dashboardStagger}
-        initial="hidden"
-        animate="show"
-      >
-        <motion.div variants={itemVariants} className="md:col-span-2">
-          <HeroTile studentName={studentName} />
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <CourseGrid courses={courses} />
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <ActivityTile />
-        </motion.div>
+      <motion.div variants={itemVariants} className="md:col-span-2">
+        <HeroTile studentName={studentName} />
       </motion.div>
-    </section>
+
+      <motion.div variants={itemVariants}>
+        <CourseGrid courses={courses} />
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <ActivityTile />
+      </motion.div>
+    </motion.section>
   );
 }

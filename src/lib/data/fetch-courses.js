@@ -75,6 +75,17 @@ export async function fetchCourses() {
       .order("created_at", { ascending: false });
 
     if (error) {
+      const isMissingTable =
+        error.message?.includes("Could not find the table") ||
+        error.code === "PGRST205";
+
+      if (isMissingTable) {
+        console.warn(
+          "[LearnDash] courses table missing — run supabase/schema.sql in Supabase SQL Editor. Using mock courses."
+        );
+        return mockCourses;
+      }
+
       const fallback = useMockInDev(
         `Supabase query failed: ${error.message}`
       );
