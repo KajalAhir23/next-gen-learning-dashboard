@@ -43,11 +43,8 @@ function isSupabaseConfigured() {
 }
 
 function getMockFallback(reason) {
-  if (process.env.NODE_ENV === "development") {
-    console.warn(`[LearnDash] ${reason} — using mock courses.`);
-    return mockCourses;
-  }
-  return null;
+  console.warn(`[LearnDash] ${reason} — using mock courses fallback.`);
+  return mockCourses;
 }
 
 /**
