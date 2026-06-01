@@ -1,12 +1,13 @@
 "use client";
 
+import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { resolveLucideIcon } from "@/lib/icons";
 import { bentoSpring } from "./bento-motion";
 
 export function CourseCard({ course }) {
   const prefersReducedMotion = useReducedMotion();
-  const Icon = resolveLucideIcon(course.icon_name);
+  const iconComponent = resolveLucideIcon(course.icon_name);
   const progress = Math.min(100, Math.max(0, course.progress));
   const progressScale = progress / 100;
 
@@ -37,7 +38,10 @@ export function CourseCard({ course }) {
       <div className="relative z-10 flex flex-col gap-4">
         <div className="flex items-start gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-            <Icon className="h-5 w-5 text-violet-300" aria-hidden />
+            {React.createElement(iconComponent, {
+              className: "h-5 w-5 text-violet-300",
+              "aria-hidden": true,
+            })}
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="truncate font-medium text-white">{course.title}</h3>

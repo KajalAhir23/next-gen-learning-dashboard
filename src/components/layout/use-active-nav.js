@@ -21,7 +21,10 @@ export function useActiveNav() {
   }, []);
 
   useEffect(() => {
-    syncFromUrl();
+    const handle = requestAnimationFrame(() => {
+      syncFromUrl();
+    });
+    return () => cancelAnimationFrame(handle);
   }, [pathname, syncFromUrl]);
 
   useEffect(() => {

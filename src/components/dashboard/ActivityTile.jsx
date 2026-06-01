@@ -5,6 +5,30 @@ import { bentoSpring } from "./bento-motion";
 
 const CHART_HEIGHTS = [35, 55, 40, 70, 50, 85, 45, 60, 75, 30, 65, 80];
 
+const chartContainerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const barVariants = {
+  hidden: { scaleY: 0, opacity: 0.3 },
+  show: {
+    scaleY: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 180,
+      damping: 16,
+    },
+  },
+};
+
 export function ActivityTile() {
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,25 +53,29 @@ export function ActivityTile() {
           Activity
         </h2>
         <p className="mt-1 text-sm text-zinc-500">
-          Contribution chart placeholder
+          Contribution chart preview
         </p>
       </header>
 
       <figure className="relative z-10 flex flex-1 flex-col gap-2">
-        <div
+        <motion.div
           className="flex flex-1 items-end justify-between gap-1 rounded-xl border border-dashed border-white/10 bg-white/[0.02] px-3 py-4"
+          variants={prefersReducedMotion ? undefined : chartContainerVariants}
+          initial="hidden"
+          animate="show"
           aria-hidden
         >
           {CHART_HEIGHTS.map((height, i) => (
-            <div
+            <motion.div
               key={i}
-              className="w-full max-w-3 rounded-sm bg-white/10"
+              className="w-full max-w-3 rounded-sm bg-gradient-to-t from-violet-500/40 to-cyan-400/80 origin-bottom will-change-transform"
               style={{ height: `${height}%` }}
+              variants={prefersReducedMotion ? undefined : barVariants}
             />
           ))}
-        </div>
+        </motion.div>
         <figcaption className="sr-only">
-          Static preview of weekly learning activity
+          Animated preview of weekly learning activity
         </figcaption>
       </figure>
     </motion.section>

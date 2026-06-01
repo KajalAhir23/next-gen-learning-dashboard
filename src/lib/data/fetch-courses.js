@@ -42,7 +42,7 @@ function isSupabaseConfigured() {
   return isValidSupabaseUrl(url) && isValidSupabaseKey(key);
 }
 
-function useMockInDev(reason) {
+function getMockFallback(reason) {
   if (process.env.NODE_ENV === "development") {
     console.warn(`[LearnDash] ${reason} — using mock courses.`);
     return mockCourses;
@@ -56,7 +56,7 @@ function useMockInDev(reason) {
  */
 export async function fetchCourses() {
   if (!isSupabaseConfigured()) {
-    const fallback = useMockInDev(
+    const fallback = getMockFallback(
       "Supabase not configured (check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local)"
     );
     if (fallback) return fallback;
@@ -86,7 +86,7 @@ export async function fetchCourses() {
         return mockCourses;
       }
 
-      const fallback = useMockInDev(
+      const fallback = getMockFallback(
         `Supabase query failed: ${error.message}`
       );
       if (fallback) return fallback;
@@ -97,7 +97,7 @@ export async function fetchCourses() {
     return /** @type {Course[]} */ (data ?? []);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    const fallback = useMockInDev(`Could not reach Supabase (${message})`);
+    const fallback = getMockFallback(`Could not reach Supabase (${message})`);
     if (fallback) return fallback;
 
     throw new Error(
