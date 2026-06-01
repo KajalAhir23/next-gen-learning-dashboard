@@ -4,5 +4,5 @@
  */
 export function getStudentName() {
   const name = process.env.NEXT_PUBLIC_STUDENT_NAME?.trim();
-  return name || "Student";
+  return name || "Kajal";
 }
