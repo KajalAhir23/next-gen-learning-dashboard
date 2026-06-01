@@ -5,14 +5,11 @@ import { ChevronLeft, ChevronRight, GraduationCap } from "lucide-react";
 import { navItems } from "./nav-items";
 import { NavLink } from "./NavLink";
 import { useNav } from "./NavProvider";
-import { getStudentName } from "@/lib/student-name";
 
 export function Sidebar() {
   const { activeId, selectNav } = useNav();
   const [collapsed, setCollapsed] = useState(false);
   const showLabels = !collapsed;
-  const name = getStudentName();
-  const avatarLetter = name.charAt(0).toUpperCase();
 
   return (
     <nav
@@ -48,28 +45,6 @@ export function Sidebar() {
           </li>
         ))}
       </ul>
-
-      <div className="mt-auto border-t border-white/10 p-2">
-        <div
-          className={`flex items-center gap-3 rounded-lg p-2 ${
-            showLabels ? "lg:justify-start" : "justify-center"
-          }`}
-        >
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-violet-500 to-cyan-400 font-semibold text-white">
-            {avatarLetter}
-          </div>
-          {showLabels && (
-            <div className="hidden min-w-0 flex-1 flex-col lg:flex">
-              <span className="truncate text-sm font-medium text-white">
-                {name}
-              </span>
-              <span className="truncate text-[10px] text-zinc-500">
-                Student
-              </span>
-            </div>
-          )}
-        </div>
-      </div>
 
       <button
         type="button"
